@@ -1,3 +1,3 @@
 var react = require('react');
 var _ = require('lodash');
-console.log(square(7));
+console.log(_.divide(6, 4));

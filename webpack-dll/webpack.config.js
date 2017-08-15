@@ -4,7 +4,7 @@ module.exports = {
     app: ['./app'],
   },
   output: {
-    filename: '[name].[chunkhash].js',
+    filename: '[name].[chunkhash:4].js',
     path: 'build/',
   },
   plugins: [new webpack.DllReferencePlugin({

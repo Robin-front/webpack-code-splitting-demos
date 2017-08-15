@@ -4,8 +4,9 @@ module.exports = {
     vendor: ['lodash','react'],
   },
   output: {
-    filename: '[name].[chunkhash].js',
+    filename: '[name].[chunkhash:4].js',
     path: 'build/',
+    library: '[name]_lib',
   },
   plugins: [new webpack.DllPlugin({
     name: '[name]_lib',
