@@ -6,6 +6,42 @@ const configs = require('./webpack.config.js');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
+// const incstr = require('incstr');
+// const createUniqueIdGenerator = () => {
+//   const index = {};
+//   const generateNextId = incstr.idGenerator({
+//     alphabet: 'abcefghijklmnopqrstuvwxyz0123456789'
+//   });
+//   return (name) => {
+//     if (index[name]) {
+//       return index[name];
+//     }
+//     let nextId;
+//     do {
+//       // Class name cannot start with a number.
+//       nextId = generateNextId();
+//     } while (/^[0-9]/.test(nextId));
+//     index[name] = generateNextId();
+//     return index[name];
+//   };
+// };
+// const uniqueIdGenerator = createUniqueIdGenerator();
+// const generateScopedName = (localName, resourcePath) => {
+//   const componentName = resourcePath.split('/').slice(-2, -1);
+//   return uniqueIdGenerator(componentName) + '_' + uniqueIdGenerator(localName);
+// };
+
+const cssloader = {
+  loader: 'css-loader/locals',
+  options: {
+    // camelCase: true,
+    // getLocalIdent: (context, localIdentName, localName) => {
+    //   return generateScopedName(localName, context.resourcePath);
+    // },
+    // modules: true
+  }
+};
+
 configs.entry = {
   'index': "./src/js/index.js"
 };
@@ -22,9 +58,8 @@ configs.module.rules = [
       fallback: 'style-loader',
       //resolve-url-loader may be chained before sass-loader if necessary
       use: [
+        cssloader,
         {
-          loader: 'css-loader'
-        }, {
           loader: 'postcss-loader',
           options: configs.postcssConfigs
         }
@@ -37,9 +72,8 @@ configs.module.rules = [
       fallback: 'style-loader',
       //resolve-url-loader may be chained before sass-loader if necessary
       use: [
+        cssloader,
         {
-          loader: 'css-loader'
-        }, {
           loader: 'postcss-loader',
           options: configs.postcssConfigs
         }, {
